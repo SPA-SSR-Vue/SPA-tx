@@ -10,5 +10,9 @@ module.exports = app => {
     .put('/:id', service.update)
     .delete('/:id', service.remove)
 
-  app.use('/admin/api/rest/:resource', controller);
+  app.use('/admin/api/rest/:resource', async (req, res, next) => {
+    const modelName = require('inflection').classify(req.params.resource)
+    req.Model = require(`./../../../../libs/db/models/${modelName}`)
+    next()
+  }, controller);
 }
