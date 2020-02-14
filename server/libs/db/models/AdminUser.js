@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const userSchema = new mongoose.Schema({
+const adminUserSchema = new mongoose.Schema({
   username: { type: String },
   password: {
     type: String,
@@ -13,4 +13,4 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
-module.exports = mongoose.model('User', userSchema, 'users')
+module.exports = mongoose.model('AdminUser', adminUserSchema, 'admin_users')

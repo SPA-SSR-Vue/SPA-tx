@@ -1,3 +1,5 @@
+const User = require('./../../../../libs/db/models/User')
+
 module.exports = {
   async create(req, res) {
     await req.Model.create(req.body)
@@ -19,8 +21,19 @@ module.exports = {
   },
 
   async findAll(req, res) {
-    const items = await req.Model.find()
-    res.send(items);
+    let options = {}
+    if (req.query.query) {
+      console.log(req.query.query);
+      const q = JSON.parse(req.query.query)
+      options = q
+      console.log(options);
+    }
+    const total = await req.Model.countDocuments(options.where || {})
+    const items = await req.Model.find().setOptions(options).where(options.where || {})
+    res.send({
+      data: items,
+      total
+    });
   },
 
   async remove(req, res) {
