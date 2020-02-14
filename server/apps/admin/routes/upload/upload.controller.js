@@ -2,7 +2,7 @@ module.exports = app => {
   const express = require('express')
   const controller = express.Router()
   const service = require('./upload.service')
-  const authMiddleware = require('./../../middleware/auth')(app)
+  const authMiddleware = require('./../../middleware/auth')()
   const multer = require('multer')
   const upload = multer({ dest: __dirname + '/../../../../public/uploads' })
 
