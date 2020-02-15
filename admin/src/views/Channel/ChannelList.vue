@@ -44,7 +44,8 @@ export default {
       fields: {
         _id: { label: "ID", width: "240" },
         "parent.name": { label: "上级频道", width: "" },
-        name: { label: "频道", width: "" }
+        name: { label: "频道", width: "" },
+        alias: { label: "别名", width: "" }
       },
       pagination: {
         total: 0,
@@ -70,8 +71,29 @@ export default {
     },
 
     async remove(id) {
-      await this.$http.delete(`/rest/${this.resource.name}/${id}`);
-      this.fetch();
+      this.$confirm(
+        `此操作将永久删除${this.resource.title}, 是否继续?`,
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      )
+        .then(async () => {
+          await this.$http.delete(`/rest/${this.resource.name}/${id}`);
+          this.fetch();
+          this.$message({
+            type: "success",
+            message: "删除成功!"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
 
     changePageSize(pageSize) {
@@ -94,5 +116,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

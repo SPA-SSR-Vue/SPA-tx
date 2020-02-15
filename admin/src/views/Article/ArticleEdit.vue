@@ -3,7 +3,7 @@
     <h3 class="form-title">{{this.isNew?'新建':'编辑'}}{{resource.title}}</h3>
     <el-form :model="model" @submit.native.prevent="save" ref="form" label-width="80px">
       <el-form-item label="所属频道">
-        <el-select v-model="model.channels" multiple filterable placeholder>
+        <el-select v-model="model.channels" multiple filterable>
           <el-option
             v-for="channel in channels"
             :key="channel._id"
@@ -13,7 +13,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="所属标签">
-        <el-select v-model="model.tags" multiple filterable placeholder>
+        <el-select v-model="model.tags" multiple filterable>
           <el-option v-for="tag in tags" :key="tag._id" :label="tag.name" :value="tag._id"></el-option>
         </el-select>
       </el-form-item>

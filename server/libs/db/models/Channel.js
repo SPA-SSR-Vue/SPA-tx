@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const channelSchema = mongoose.Schema({
   name: { type: String },
-  parent: { type: mongoose.SchemaTypes.ObjectId, ref: 'Channel' },
   alias: { type: String },
+  parent: { type: mongoose.SchemaTypes.ObjectId, ref: 'Channel' },
 }, {
   timestamps: true
 })

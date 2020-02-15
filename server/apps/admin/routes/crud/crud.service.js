@@ -16,6 +16,18 @@ module.exports = {
   },
 
   async findOne(req, res) {
+    // let options = {}
+    // if (req.query.query) {
+    //   options = JSON.parse(req.query.query)
+    //   if (options.populate && Array.isArray(options.populate) && options.populate.length == 2) {
+    //     const item = await req.Model.findById(req.params.id).populate(options.populate[0]).populate(options.populate[1])
+    //     return res.send(item);
+    //   }
+    //   if (Array.isArray(options.populate) && options.populate.length == 3) {
+    //     const item = await req.Model.findById(req.params.id).populate(options.populate[0]).populate(options.populate[1]).populate(options.populate[2])
+    //     return res.send(item);
+    //   }
+    // }
     const item = await req.Model.findById(req.params.id)
     res.send(item);
   },
@@ -23,10 +35,8 @@ module.exports = {
   async findAll(req, res) {
     let options = {}
     if (req.query.query) {
-      console.log(req.query.query);
       const q = JSON.parse(req.query.query)
       options = q
-      console.log(options);
     }
     const total = await req.Model.countDocuments(options.where || {})
     const items = await req.Model.find().setOptions(options).where(options.where || {})

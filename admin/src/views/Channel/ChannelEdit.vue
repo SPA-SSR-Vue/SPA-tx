@@ -3,7 +3,7 @@
     <h3 class="form-title">{{this.isNew?'新建':'编辑'}}{{resource.title}}</h3>
     <el-form :model="model" @submit.native.prevent="save" ref="form" label-width="80px">
       <el-form-item label="上级频道">
-        <el-select v-model="model.parent" filterable placeholder>
+        <el-select v-model="model.parent" filterable>
           <el-option
             v-for="channel in channels"
             :key="channel._id"
