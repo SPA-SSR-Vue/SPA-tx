@@ -1,16 +1,33 @@
-module.exports = app => {
-  const express = require('express')
-  const controller = express.Router()
-  const service = require('./crud.service')
-  const authMiddleware = require('./../../middleware/auth')()
-  const resourceMiddleware = require('./../../middleware/resource')()
+const service = require('./crud.service')
 
-  controller
-    .post('/', service.create)
-    .get('/', service.findAll)
-    .get('/:id', service.findOne)
-    .put('/:id', service.update)
-    .delete('/:id', service.remove)
+module.exports = {
+  async create(req, res) {
+    const body = req.body
+    const result = await service.create(req, body)
+    res.send(result);
+  },
 
-  app.use('/admin/api/rest/:resource', authMiddleware, resourceMiddleware, controller);
+  async update(req, res) {
+    const body = req.body
+    const id = req.params.id || ''
+    const result = await service.update(req, id, body)
+    res.send(result);
+  },
+
+  async findOne(req, res) {
+    const id = req.params.id || ''
+    const result = await service.findOne(req, id)
+    res.send(result);
+  },
+
+  async findAll(req, res) {
+    const result = await service.findAll(req)
+    res.send(result);
+  },
+
+  async remove(req, res) {
+    const id = req.params.id || ''
+    const result = await service.remove(req, id)
+    res.send(result);
+  },
 }

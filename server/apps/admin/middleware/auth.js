@@ -8,9 +8,9 @@ module.exports = options => {
     assert(token, 401, '请先登录')
     const data = jwt.verify(token, req.app.get('SECRET'))
     assert(data, 401, '请先登录')
-    const user = await AdminUser.findById(data.id)
-    assert(user, 401, '请先登录')
-    req.user = user
+    const adminUser = await AdminUser.findById(data.id)
+    assert(adminUser, 401, '请先登录')
+    req.adminUser = adminUser
     next()
   }
 }
