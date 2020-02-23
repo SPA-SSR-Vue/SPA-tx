@@ -9,11 +9,7 @@ async function login(req, username, password) {
   const isValid = bcrypt.compareSync(password, adminUser.password)
   assert(isValid, 422, '密码错误')
   const token = jwt.sign({ id: adminUser._id }, req.app.get('SECRET'))
-  return {
-    success: true,
-    message: '登陆成功',
-    token
-  }
+  return token
 }
 
 module.exports = {
