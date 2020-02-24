@@ -32,7 +32,7 @@ export default {
   methods: {
     async login() {
       const res = await this.$http.post("/login", this.model);
-      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("tx-token", res.data.token);
       this.$router.push("/");
     }
   }

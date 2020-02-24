@@ -76,7 +76,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (!to.meta.isPublic && !localStorage.token) {
+  if (!to.meta.isPublic && !localStorage.getItem('tx-token')) {
     router.push('/login')
     return
   }

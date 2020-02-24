@@ -57,8 +57,8 @@ export default {
         pageSizes: [5, 10, 15, 20]
       },
       query: {
-        skip: 0,
-        limit: 5
+        page: 1,
+        size: 5
       }
     };
   },
@@ -101,12 +101,12 @@ export default {
     },
 
     changePageSize(pageSize) {
-      this.query.limit = pageSize;
+      this.query.size = pageSize;
       this.fetch();
     },
 
     changeCurrentSize(currentPage) {
-      this.query.skip = (currentPage - 1) * this.query.limit;
+      this.query.page = currentPage;
       this.fetch();
     }
   },

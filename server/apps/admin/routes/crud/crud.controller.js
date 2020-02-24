@@ -22,6 +22,16 @@ module.exports = {
     });
   },
 
+  async remove(req, res) {
+    const id = req.params.id || ''
+    const item = await service.remove(req, id)
+    res.send({
+      success: true,
+      message: '删除成功',
+      data: item
+    });
+  },
+
   async findOne(req, res) {
     const id = req.params.id || ''
     const item = await service.findOne(req, id)
@@ -33,21 +43,27 @@ module.exports = {
   },
 
   async findAll(req, res) {
-    const items = await service.findAll(req)
+    let queryOptions = {}
+    if (req.query.query) {
+      let { page = 1, size = 0, skip = 0, options = {} } = JSON.parse(req.query.query)
+      if (size <= 0) {
+        queryOptions = options
+      } else {
+        skip = (page - 1) * size <= 0 ? 0 : (page - 1) * size
+        options.skip = skip
+        options.limit = size
+        queryOptions = options
+      }
+    }
+    console.log(queryOptions);
+    const result = await service.find(req, queryOptions)
     res.send({
       success: true,
       message: '查找成功',
-      data: items
+      total: result.total,
+      data: result.items
     });
   },
 
-  async remove(req, res) {
-    const id = req.params.id || ''
-    const item = await service.remove(req, id)
-    res.send({
-      success: true,
-      message: '删除成功',
-      data: item
-    });
-  },
+
 }

@@ -20,8 +20,6 @@ require('./admin/routes')(app)
 app.use('/', (err, req, res, next) => {
   res.status(err.statusCode || 500).send({
     message: err.message
-  } || {
-    message: '请求错误!'
   });
 });
 
