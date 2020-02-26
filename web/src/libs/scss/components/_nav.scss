@@ -1,0 +1,29 @@
+.nav {
+  &.fl {
+    > .nav-item {
+      float: left;
+    }
+    @include clearfix;
+  }
+
+  &.fr {
+    > .nav-item {
+      float: right;
+    }
+    @include clearfix;
+  }
+}
+
+.nav {
+  > .nav-item {
+    > .nav-link {
+      display: block;
+    }
+  }
+}
+
+.nav {
+  .nav-link {
+    display: inline-block;
+  }
+}

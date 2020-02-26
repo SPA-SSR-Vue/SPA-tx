@@ -1,0 +1,68 @@
+// flex
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+@each $jcKey, $jcValue in $flex-jc {
+  .jc-#{$jcKey} {
+    justify-content: $jcValue;
+  }
+}
+
+@each $aiKey, $aiValue in $flex-ai {
+  .ai-#{$aiKey} {
+    align-items: $aiValue;
+  }
+}
+
+// display
+@each $displayVal in (block, inline, inline-block, none) {
+  .d-#{$displayVal} {
+    display: $displayVal;
+  }
+}
+
+// float
+// float
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}
+
+.clearfix {
+  @include clearfix;
+}
+
+.bfc {
+  overflow: hidden;
+}
+
+// position
+@each $positionVal in (static, relative, absolute, fixed, sticky) {
+  .p-#{$positionVal} {
+    position: $positionVal;
+  }
+}
+
+.z999 {
+  z-index: 999;
+}
+
+.z1000 {
+  z-index: 1000;
+}
